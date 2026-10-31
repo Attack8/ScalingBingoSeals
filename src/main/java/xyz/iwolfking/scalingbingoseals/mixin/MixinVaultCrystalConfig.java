@@ -4,22 +4,15 @@ import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import iskallia.vault.config.VaultCrystalConfig;
 import iskallia.vault.config.entry.LevelEntryList;
-import iskallia.vault.core.vault.player.ClassicListenersLogic;
 import iskallia.vault.item.crystal.CrystalData;
 import iskallia.vault.item.crystal.layout.ClassicInfiniteCrystalLayout;
-import iskallia.vault.item.crystal.layout.CrystalLayout;
 import iskallia.vault.item.crystal.objective.CrystalObjective;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import xyz.iwolfking.scalingbingoseals.config.ScalingBingoSealsConfig;
 import xyz.iwolfking.scalingbingoseals.objective.ScalingBingoCrystalObjective;
-import xyz.iwolfking.vhapi.api.registry.VaultObjectiveRegistry;
 
 import java.util.Map;
 
@@ -27,7 +20,7 @@ import java.util.Map;
 public class MixinVaultCrystalConfig {
     @Shadow private Map<ResourceLocation, LevelEntryList<VaultCrystalConfig.SealEntry>> SEALS;
 
-    @WrapOperation(method = "lambda$applySeal$5", at = @At(value = "INVOKE", target = "Liskallia/vault/item/crystal/CrystalData;setObjective(Liskallia/vault/item/crystal/objective/CrystalObjective;)V"))
+    @WrapOperation(method = "lambda$applySeal$18", at = @At(value = "INVOKE", target = "Liskallia/vault/item/crystal/CrystalData;setObjective(Liskallia/vault/item/crystal/objective/CrystalObjective;)V"))
     private static void modifyScalingBingoObjective(CrystalData instance, CrystalObjective objective, Operation<Void> original) {
         if(objective instanceof ScalingBingoCrystalObjective) {
             if(instance.getObjective() instanceof ScalingBingoCrystalObjective scalingBingoCrystalObjective) {
